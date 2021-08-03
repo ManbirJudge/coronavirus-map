@@ -18,7 +18,7 @@ const SecondPage = () => {
   return (
     <Layout pageName="about">
       <Helmet>
-        <title>About</title>
+        <title>Coronavirus Map - About</title>
       </Helmet>
       <Container type="content">
         <h1>About</h1>

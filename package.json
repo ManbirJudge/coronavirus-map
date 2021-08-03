@@ -6,7 +6,7 @@
 	"author": {
 		"name": "Manbir Singh Judge",
 		"email": "manbirjudge2009@gmail.com",
-		"url": "https://www.google.com"
+		"url": "https://github.com/ManbirJudge/"
 	},
 	"dependencies": {
 		"axios": "^0.21.1",
@@ -85,9 +85,9 @@
 	"homepage": "https://gatsby-starter-leaflet.netlify.app/",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/colbyfayock/gatsby-starter-leaflet"
+		"url": "https://github.com/ManbirJudge/coronavirus-map"
 	},
 	"bugs": {
-		"url": "https://github.com/colbyfayock/gatsby-starter-leaflet/issues"
+		"url": "https://github.com/ManbirJudge/coronavirus-map/issues"
 	}
 }
