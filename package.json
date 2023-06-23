@@ -9,9 +9,9 @@
 		"url": "https://github.com/ManbirJudge/"
 	},
 	"scripts": {
-		"build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
+		"build": "gatsby clean && gatsby build --log-pages",
 		"clean": "gatsby clean",
-		"dev": "gatsby develop",
+		"dev": "gatsby clean && gatsby develop",
 		"serve": "gatsby serve"
 	},
 	"dependencies": {
@@ -41,15 +41,18 @@
 		"query-string": "^8.1.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"react-helmet": "^6.1.0",
 		"react-icons": "^4.10.1",
 		"react-leaflet": "^4.2.1",
-		"shallow-compare": "^1.2.2"
+		"shallow-compare": "^1.2.2",
+		"string-similarity": "^4.0.4"
 	},
 	"devDependencies": {
 		"@gatsbyjs/webpack-hot-middleware": "^2.25.3",
 		"babel-preset-gatsby": "^3.11.0",
+		"deepmerge": "^4.3.1",
+		"node-html-parser": "^6.1.5",
 		"sass": "^1.63.6",
+		"style-to-object": "^0.4.1",
 		"webpack-hot-middleware": "^2.25.4"
 	},
 	"keywords": [

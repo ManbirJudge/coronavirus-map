@@ -11,19 +11,18 @@ const Map = (props) => {
 	const {
 		children,
 		className,
-		defaultBaseMap = DEFAULT_MAP_SERVICE,
-		...rest
+		baseMapServiceName = DEFAULT_MAP_SERVICE,
+		...otherProps
 	} = props;
 
 	useConfigureLeaflet();
 
 	const services = useMapServices({
-		names: [...new Set([defaultBaseMap, DEFAULT_MAP_SERVICE])],
+		names: [...new Set([baseMapServiceName, DEFAULT_MAP_SERVICE])],
 	});
-	const basemap = services.find((service) => service.name === defaultBaseMap);
+	const baseMapService = services.find((service) => service.name === baseMapServiceName);
 
 	let mapClassName = `map`;
-
 	if (className) {
 		mapClassName = `${mapClassName} ${className}`;
 	}
@@ -36,17 +35,11 @@ const Map = (props) => {
 		);
 	}
 
-	const mapSettings = {
-		className: "map-base",
-		zoomControl: false,
-		...rest,
-	};
-
 	return (
 		<div className={mapClassName}>
-			<MapContainer {...mapSettings}>
+			<MapContainer className="map-base" ZoomControl="false" {...otherProps}>
 				{children}
-				{basemap && <TileLayer {...basemap} />}
+				{baseMapService && <TileLayer {...baseMapService} />}
 				<ZoomControl position="bottomright" />
 			</MapContainer>
 		</div>
@@ -56,7 +49,7 @@ const Map = (props) => {
 Map.propTypes = {
 	children: PropTypes.node,
 	className: PropTypes.string,
-	defaultBaseMap: PropTypes.string,
+	baseMapService: PropTypes.string,
 };
 
 export default Map;

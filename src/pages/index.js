@@ -1,17 +1,10 @@
-import React, { } from "react";
-import { Helmet } from "react-helmet";
-import L from "leaflet";
+import React from "react";
+import leaftlet from "leaflet";
 import { useMap } from "react-leaflet";
-
+import axios from 'axios';
 
 import Layout from "../components/Layout";
-// import Container from "../components/Container";
 import Map from "../components/Map";
-// import Snippet from "../components/Snippet";
-
-
-// Added by Me
-import axios from 'axios';
 
 const LOCATION = {
 	lat: 0,
@@ -19,37 +12,25 @@ const LOCATION = {
 };
 const CENTER = [LOCATION.lat, LOCATION.lng];
 const DEFAULT_ZOOM = 2;
-const ZOOM = 10;
 
-const timeToZoom = 2000;
-const timeToOpenPopupAfterZoom = 4000;
-const timeToUpdatePopupAfterZoom = timeToOpenPopupAfterZoom + 3000;
-
-/**
- * MapEffect
- * @description This is an example of creating an effect used to zoom in and set a popup on load
- */
-const MapEffect = ({ markerRef }) => {
+const MapEffect = () => {
 	const map = useMap();
 
 	axios.get('https://corona.lmao.ninja/v2/countries').then(response => {
-		const { data = [] } = response;
+		const { data } = response;
 		const hasData = Array.isArray(data) && data.length > 0;
 
-		if (!hasData) return null;
-
-		console.log(response);
+		if (!hasData) return
 
 		const geoJson = {
 			type: 'FeatureCollection',
-			features: data.map((country = {}) => {
-				const { countryInfo = {} } = country;
+			features: data.map(country => {
+				const { countryInfo } = country;
 				const { lat, long: lng } = countryInfo;
+
 				return {
 					type: 'Feature',
-					properties: {
-						...country,
-					},
+					properties: country,
 					geometry: {
 						type: 'Point',
 						coordinates: [lng, lat]
@@ -58,97 +39,86 @@ const MapEffect = ({ markerRef }) => {
 			})
 		};
 
-		const geoJsonLayers = new L.GeoJSON(geoJson, {
-			pointToLayer: (feature = {}, latlng) => {
-				const { properties = {} } = feature;
-				let updatedFormatted;
-				let casesString;
+		const geoJsonLayers = new leaftlet.GeoJSON(
+			geoJson,
+			{
+				pointToLayer: (feature, coordinates) => {
+					const { properties } = feature;
+					const {
+						country,
+						updated,
+						cases,
+						deaths,
+						recovered
+					} = properties
 
-				const {
-					country,
-					updated,
-					cases,
-					deaths,
-					recovered
-				} = properties
+					let casesString = `${cases}`;
+					if (cases > 1000) {
+						casesString = `${casesString.slice(0, -3)}k+`
+					}
 
-				casesString = `${cases}`;
+					let updatedStr;
+					if (updated) {
+						updatedStr = new Date(updated).toLocaleString();
+					}
 
-				if (cases > 1000) {
-					casesString = `${casesString.slice(0, -3)}k+`
+					const html = `
+						<span class="icon-marker">
+						<span class="icon-marker-tooltip">
+							<h2>${country}</h2>
+							<ul>
+							<li><strong>Confirmed:</strong> ${cases}</li>
+							<li><strong>Deaths:</strong> ${deaths}</li>
+							<li><strong>Recovered:</strong> ${recovered}</li>
+							<li><strong>Last Update:</strong> ${updatedStr}</li>
+							</ul>
+						</span>
+						${casesString}
+						</span>
+					`;
+
+					return leaftlet.marker(
+						coordinates,
+						{
+							icon: leaftlet.divIcon({
+								className: 'icon',
+								html
+							}),
+							riseOnHover: true
+						}
+					);
 				}
-
-				if (updated) {
-					updatedFormatted = new Date(updated).toLocaleString();
-				}
-
-				const html = `
-				<span class="icon-marker">
-				  <span class="icon-marker-tooltip">
-					<h2>${country}</h2>
-					<ul>
-					  <li><strong>Confirmed:</strong> ${cases}</li>
-					  <li><strong>Deaths:</strong> ${deaths}</li>
-					  <li><strong>Recovered:</strong> ${recovered}</li>
-					  <li><strong>Last Update:</strong> ${updatedFormatted}</li>
-					</ul>
-				  </span>
-				  ${casesString}
-				</span>
-			  `;
-
-				return L.marker(latlng, {
-					icon: L.divIcon({
-						className: 'icon',
-						html
-					}),
-					riseOnHover: true
-				});
 			}
-		});
+		)
 
 		geoJsonLayers.addTo(map);
 	}).catch(err => {
-		console.log(`Failed to Fetch Countries: ${err.message}`, err);
-		return null;
-	});
+		console.log(`Failed to fetch countries: ${err.message}`);
+		return
+	})
 
-	return null;
+	return
 };
 
 const IndexPage = () => {
-	// const markerRef = useRef();
-
 	const mapSettings = {
 		center: CENTER,
-		defaultBaseMap: "OpenStreetMap",
+		baseMapService: "OpenStreetMap",
 		zoom: DEFAULT_ZOOM,
-
 	};
 
 	return (
 		<Layout pageName="home">
-			<Helmet>
-				<title>Coronavirus Map - Home</title>
-			</Helmet>
-
 			<Map {...mapSettings}>
 				<MapEffect />
 			</Map>
-
-			{/* <Container type="content" className="text-center home-start">
-				<h2>Still Getting Started?</h2>
-				<p>Run the following in your terminal!</p>
-				<Snippet>
-					gatsby new [directory]
-					https://github.com/colbyfayock/gatsby-starter-leaflet
-				</Snippet>
-				<p className="note">
-					Note: Gatsby CLI required globally for the above command
-				</p>
-			</Container> */}
 		</Layout>
 	);
 };
-
 export default IndexPage;
+
+export function Head() {
+	return (
+		<title>Home | Coronovirus Map</title>
+	)
+}
