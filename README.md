@@ -1,8 +1,8 @@
-# 🍃 Cornovirus Map
-Check the coronoavirus status of any contry easily and efficiently.
+# 🍃 Coronavirus Map
+Check the coronavirus status of any country easily and efficiently.
 
 ## Motivation
-I wanted to learn Gatsby but did not know where to start. I stumbled upon Leaflet and it seemed the perfect way to get into Gatsby developement. BUTTTT 🍑 ... I actually cloned this project from this [Github repositry](https://github.com/amidabrian51/my-coronovirus-map.git) so this is not really my project.
+I wanted to learn Gatsby but did not know where to start. I stumbled upon Leaflet and it seemed the perfect way to get into Gatsby development. BUTTTT 🍑 ... I actually cloned this project from this [Github repository](https://github.com/amidabrian51/my-coronovirus-map.git) so this is not really my project.
 
 ## TODO
 - Fix dependency issues.
