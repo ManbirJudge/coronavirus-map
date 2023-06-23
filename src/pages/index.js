@@ -1,16 +1,14 @@
-import React, { useRef, useEffect } from "react";
+import React, { } from "react";
 import { Helmet } from "react-helmet";
 import L from "leaflet";
-import { Marker, useMap } from "react-leaflet";
+import { useMap } from "react-leaflet";
 
-import { promiseToFlyTo, getCurrentLocation } from "lib/map";
 
-import Layout from "components/Layout";
-// import Container from "components/Container";
-import Map from "components/Map";
-// import Snippet from "components/Snippet";
+import Layout from "../components/Layout";
+// import Container from "../components/Container";
+import Map from "../components/Map";
+// import Snippet from "../components/Snippet";
 
-import gatsby_astronaut from "assets/images/gatsby-astronaut.jpg";
 
 // Added by Me
 import axios from 'axios';
@@ -31,7 +29,6 @@ const timeToUpdatePopupAfterZoom = timeToOpenPopupAfterZoom + 3000;
  * MapEffect
  * @description This is an example of creating an effect used to zoom in and set a popup on load
  */
-
 const MapEffect = ({ markerRef }) => {
 	const map = useMap();
 
