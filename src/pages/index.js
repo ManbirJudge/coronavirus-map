@@ -101,7 +101,7 @@ const MapEffect = () => {
 const IndexPage = () => {
 	const mapSettings = {
 		center: CENTER,
-		mapServiceName: "StadiaMaps",
+		mapServiceName: "OpenStreetMap",
 		zoom: DEFAULT_ZOOM,
 	};
 
