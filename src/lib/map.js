@@ -1,18 +1,12 @@
-/**
- * promiseToFlyTo
- * @description
- */
-
-export function promiseToFlyTo(map, { zoom, center }) {
+export function mapFlyTo(map, { zoom, center }) {
 	return new Promise((resolve, reject) => {
-		const baseError = "Failed to fly to area";
+		const baseErrMsg = "Failed to fly to area";
 
 		if (!map.flyTo) {
-			reject(`${baseError}: no flyTo method on map`);
+			reject(`${baseErrMsg}: no 'flyTo' method on map.`);
 		}
-
 		if (typeof zoom !== "number") {
-			reject(`${baseError}: zoom invalid number ${zoom}`);
+			reject(`${baseErrMsg}: Zoom value must be a number: ${zoom}.`);
 		}
 
 		const mapCenter = center || map.getCenter();
@@ -28,16 +22,11 @@ export function promiseToFlyTo(map, { zoom, center }) {
 	});
 }
 
-/**
- * getCurrentLocation
- * @description
- */
-
-export function getCurrentLocation() {
+export function getCurLoc() {
 	return new Promise((resolve, reject) => {
 		navigator.geolocation.getCurrentPosition(
-			(pos) => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-			(err) => reject(err)
+			pos => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+			err => reject(err)
 		);
 	});
 }

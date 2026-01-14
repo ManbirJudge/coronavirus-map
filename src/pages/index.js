@@ -16,11 +16,9 @@ const DEFAULT_ZOOM = 2;
 const MapEffect = () => {
 	const map = useMap();
 
-	axios.get('https://corona.lmao.ninja/v2/countries').then(response => {
-		const { data } = response;
-		const hasData = Array.isArray(data) && data.length > 0;
-
-		if (!hasData) return
+	axios.get('https://disease.sh/v3/covid-19/countries').then(res => {
+		const { data } = res;
+		if (!(Array.isArray(data) && data.length > 0)) return;
 
 		const geoJson = {
 			type: 'FeatureCollection',
@@ -42,7 +40,7 @@ const MapEffect = () => {
 		const geoJsonLayers = new leaftlet.GeoJSON(
 			geoJson,
 			{
-				pointToLayer: (feature, coordinates) => {
+				pointToLayer: (feature, coord) => {
 					const { properties } = feature;
 					const {
 						country,
@@ -78,7 +76,7 @@ const MapEffect = () => {
 					`;
 
 					return leaftlet.marker(
-						coordinates,
+						coord,
 						{
 							icon: leaftlet.divIcon({
 								className: 'icon',
@@ -93,7 +91,7 @@ const MapEffect = () => {
 
 		geoJsonLayers.addTo(map);
 	}).catch(err => {
-		console.log(`Failed to fetch countries: ${err.message}`);
+		console.log(`Failed to fetch data: ${err.message}`);
 		return
 	})
 
@@ -103,7 +101,7 @@ const MapEffect = () => {
 const IndexPage = () => {
 	const mapSettings = {
 		center: CENTER,
-		baseMapService: "OpenStreetMap",
+		mapServiceName: "StadiaMaps",
 		zoom: DEFAULT_ZOOM,
 	};
 
@@ -115,10 +113,11 @@ const IndexPage = () => {
 		</Layout>
 	);
 };
+
 export default IndexPage;
 
 export function Head() {
 	return (
-		<title>Home | Coronovirus Map</title>
+		<title>Coronovirus Map</title>
 	)
 }

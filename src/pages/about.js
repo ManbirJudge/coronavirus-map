@@ -6,31 +6,27 @@ import Container from "../components/Container";
 
 const AboutPage = () => {
 	const {
-		companyName,
-		companyUrl,
+		projectRepoUrl,
 		authorName,
 		authorUrl,
-		siteDescription,
+		projectDesc,
 	} = useSiteMetadata();
 
 	return (
 		<Layout pageName="about">
 			<Container type="content">
 				<h1>About</h1>
-				<h2>{companyName}</h2>
-				<p>{siteDescription}</p>
-				<p>
-					<a href={companyUrl}>View on Github</a>
-				</p>
-				<h2>Created By</h2>
-				<p>
-					<a href={authorUrl}>{authorName}</a>
-				</p>
+				<p>{projectDesc}</p>
+				<p>In the future, this page will be much more informative. Till then following are some points:</p>
+				<ul>
+					<li><p><a href={projectRepoUrl}>Project Github</a></p></li>
+					<li><p>My GitHub profile: <a href={authorUrl}>{authorName}</a></p></li>
+				</ul>
 			</Container>
 		</Layout>
-	)
+	);
 }
-export default AboutPage
+export default AboutPage;
 
 export function Head() {
 	return (

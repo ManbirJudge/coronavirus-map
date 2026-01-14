@@ -2,17 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Container = ({ children, className, type }) => {
-	let containerClassName = "container";
+	className = `${className} container`;
 
 	if (typeof type === "string") {
-		containerClassName = `${containerClassName} container-${type}`;
+		className = `${className} container-${type}`;
 	}
-
 	if (typeof className === "string") {
-		containerClassName = `${containerClassName} ${className}`;
+		className = `${className} ${className}`;
 	}
 
-	return <div className={containerClassName}>{children}</div>;
+	return <div className={className}>{children}</div>;
 };
 
 Container.propTypes = {

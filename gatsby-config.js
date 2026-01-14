@@ -3,12 +3,11 @@ const config = require("./package.json");
 const { title, description, author, repository, homepage } = config;
 
 const siteMetadata = {
-	companyName: title,
-	companyUrl: repository.url,
+	projectName: title,
+	projectRepoUrl: repository.url,
 	authorName: author.name,
 	authorUrl: author.url,
-	siteUrl: homepage,
-	siteDescription: description,
+	projectDesc: description,
 };
 
 module.exports = {
@@ -19,25 +18,24 @@ module.exports = {
 			resolve: "gatsby-plugin-sass",
 			options: {
 				implementation: require("sass"),
-			},
+			}
 		},
-		"gatsby-plugin-react-helmet",
-		{
-			resolve: `gatsby-source-filesystem`,
-			options: {
-				name: `images`,
-				path: `${__dirname}/src/assets/images`,
-			},
-		},
+		// {
+		// 	resolve: `gatsby-source-filesystem`,
+		// 	options: {
+		// 		name: `images`,
+		// 		path: `${__dirname}/src/assets/images`,
+		// 	}
+		// },
 		"gatsby-plugin-react-leaflet",
-		{
-			resolve: "gatsby-plugin-manifest",
-			options: {
-				name: siteMetadata.companyName,
-				short_name: siteMetadata.companyName,
-				start_url: "/",
-				icon: "src/assets/images/react-leaflet-icon.png",
-			},
-		},
-	],
+		// {
+		// 	resolve: "gatsby-plugin-manifest",
+		// 	options: {
+		// 		name: siteMetadata.projectName,
+		// 		short_name: siteMetadata.projectName,
+		// 		start_url: "/",
+		// 		icon: "src/assets/images/icon.png",
+		// 	},
+		// },
+	]
 };

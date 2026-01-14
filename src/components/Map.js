@@ -2,25 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
 
-import { useConfigureLeaflet, useMapServices } from "../hooks";
+import { useMapServices } from "../hooks";
 import { isDomAvailable } from "../lib/util";
 
-const DEFAULT_MAP_SERVICE = "OpenStreetMap";
+const DEFAULT_MAP_SERVICE_NAME = "OpenStreetMap";
 
-const Map = (props) => {
+const Map = props => {
 	const {
 		children,
 		className,
-		baseMapServiceName = DEFAULT_MAP_SERVICE,
+		mapServiceName = DEFAULT_MAP_SERVICE_NAME,
 		...otherProps
 	} = props;
 
-	useConfigureLeaflet();
-
 	const services = useMapServices({
-		names: [...new Set([baseMapServiceName, DEFAULT_MAP_SERVICE])],
+		names: [mapServiceName],
 	});
-	const baseMapService = services.find((service) => service.name === baseMapServiceName);
+	const mapService = services[0];
 
 	let mapClassName = `map`;
 	if (className) {
@@ -37,9 +35,9 @@ const Map = (props) => {
 
 	return (
 		<div className={mapClassName}>
-			<MapContainer className="map-base" ZoomControl="false" {...otherProps}>
+			<MapContainer className="map-base" zoomControl={false} {...otherProps}>
 				{children}
-				{baseMapService && <TileLayer {...baseMapService} />}
+				{mapService && <TileLayer {...mapService} />}
 				<ZoomControl position="bottomright" />
 			</MapContainer>
 		</div>

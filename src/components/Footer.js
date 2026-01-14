@@ -10,10 +10,7 @@ const Footer = () => {
 	return (
 		<footer>
 			<Container>
-				<p>
-					&copy; {new Date().getFullYear()},{" "}
-					<a href={authorUrl}>{authorName}</a>
-				</p>
+				<p>Made with ❤️ by <a href={authorUrl}>{authorName}</a></p>
 			</Container>
 		</footer>
 	);

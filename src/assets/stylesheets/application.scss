@@ -4,21 +4,21 @@
 @import "pages/__pages";
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  font-family: $font-default;
-  padding: 0;
-  margin: 0;
+	font-family: $font-default;
+	padding: 0;
+	margin: 0;
 }
 
 .wrapper {
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+	min-height: 100vh;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
 }
 
 main {
-  padding: 2em 0;
+	padding: 0;
 }

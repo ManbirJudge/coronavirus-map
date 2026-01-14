@@ -5,6 +5,6 @@ export function getMapServices() {
 }
 
 export function getMapServiceByName(name, additionalServices = []) {
-	const services = [...getMapServices(), ...additionalServices];
-	return services.find(service => service.name === name);
+	const allServices = [...getMapServices(), ...additionalServices];
+	return allServices.find(service => service.name === name);
 }

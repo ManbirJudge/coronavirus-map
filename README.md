@@ -1,12 +1,22 @@
-# 🍃 Coronavirus Map
-Check the coronavirus status of any country easily and efficiently.
+# Coronavirus Map
+Map to see coronavirus statistics of countries.
+Check it out [here.](https://corona-map-1400.netlify.app)
 
 ## Motivation
-I wanted to learn Gatsby but did not know where to start. I stumbled upon Leaflet and it seemed the perfect way to get into Gatsby development. BUTTTT 🍑 ... I actually cloned this project from this [Github repository](https://github.com/amidabrian51/my-coronovirus-map.git) so this is not really my project.
+I wanted to learn Gatsby but didon't know where to start. I stumbled upon Leaflet and it seemed the perfect way to get into Gatsby development. BUT... I actually cloned this project from this [Github repo](https://github.com/amidabrian51/my-coronovirus-map.git) so this isn't really my project.
 
-## TODO
-- Fix dependency issues.
-- Find alternatives to the various deperecated dependencies currently in use.
+## TODOs
+- Fix undepreceated dependency issues. `!important`
 - Better map markers on the GeoJSON layer.
-- Better and more informative (info dense) dialogs on map marker hover.
-- Sharing the status of a country.
+- Better and more informative dialogs on map marker hover.
+- Ability to share.
+- Ability to change map service.
+- Cleanup SASS. `!important`
+- Cleanup JS.
+- Add manifest and icon using `gatsby-plugin-manifest`. `!important`
+
+## Changelog
+### 14-01-2024
+- Updated dependencies.
+- Small cleanup.
+- Hosting.
